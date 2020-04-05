@@ -1,0 +1,19 @@
+{
+    "data":[
+        {
+            "email":"abcdef@gmail.com",
+            "username":"abcdef",
+            "password":"abcd"
+        },
+        {
+            "email":"ghijkl@gmail.com",
+            "username":"ghijkl",
+            "password":"abcd"
+        },
+        {
+            "email":"mnopqr@gmail.com",
+            "username":"mnopqr",
+            "password":"abcd"
+        }
+    ]
+}
