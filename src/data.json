@@ -1,6 +1,11 @@
 {
     "data":[
         {
+            "email":"abhinav@gmail.com",
+            "username":"abhinav.gautam",
+            "password":"abcd"
+        },
+        {
             "email":"abcdef@gmail.com",
             "username":"abcdef",
             "password":"abcd"
