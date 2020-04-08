@@ -2,6 +2,8 @@ import React from 'react';
 import Hidden from './hidden.js';
 //import datajson from '../data.json';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
+//import Employee from './employee.js';
 
 class Signup extends React.Component {
     constructor() {
@@ -17,8 +19,10 @@ class Signup extends React.Component {
                 forms: false,
                 formc: false,
                 formvalid: false
+                
             },
-            message: ""
+            message: "",
+            formnext:false
         }
     }
 
@@ -70,12 +74,16 @@ class Signup extends React.Component {
 
             if (!found) {
                 this.setState({ message: "Invalid email/username or password !" });
+                
             }
             else {
-                this.setState({ message: "" });
+                //console.log(this.state.form.username);
+                this.setState({ message: "",formnext:true });
+                
             }
 
         }).catch((err) => {
+            this.setState({formnext:false });
             console.log(err + " try again");
         });
 
@@ -89,8 +97,9 @@ class Signup extends React.Component {
     }
 
     render() {
-        return (<div>
-            {this.state.valid.formc ? <div><Hidden /></div> : <div>
+        return (
+        <div>
+            {this.state.formnext?<Redirect to={`/employee/${this.state.form.username}/${this.state.form.password}`}></Redirect>:<div>{this.state.valid.formc ? <div><Hidden /></div> : <div>
                 <div className="container">
                     <div className="row" style={{ margin: '100px' }}>
                         <div className="col-md-8">
@@ -119,7 +128,7 @@ class Signup extends React.Component {
                                             <span style={{ color: "grey" }}>&nbsp;stay signed-in</span>
                                             <button className="btn btn-primary float-right" type="button" disabled={!this.state.valid.formvalid} onClick={this.validate}>Sign in</button>
                                         </div>
-                                        <span className="text-danger">{this.state.message}</span>
+                                         <span className="text-danger">{this.state.message}</span>
 
                                     </form>
                                 </div>
@@ -132,7 +141,8 @@ class Signup extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>}
+            </div>
+    }</div>}
         </div>
         );
     }
