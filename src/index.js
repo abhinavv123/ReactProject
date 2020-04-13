@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Employee from './Components/employee';
 import Signup from './Components/Signup';
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 ReactDOM.render(<BrowserRouter>
     <Route path="/" component={Signup} />

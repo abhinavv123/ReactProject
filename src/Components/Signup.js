@@ -115,12 +115,12 @@ class Signup extends React.Component {
                                     <form>
                                         <div className="form-group">
                                             <label htmlFor="name"><span style={{ color: "grey" }}>Email or Username</span></label>
-                                            <input type="text" id="name" className="form-control" style={{ width: '60%' }} onChange={this.handlechange} required></input>
+                                            <input type="text" id="name" className="form-control" style={{ width: '60%',border:"none",borderBottomStyle:"ridge"}} onChange={this.handlechange} required></input>
                                         </div>
 
                                         <div className="form-group">
                                             <label htmlFor="password"><span style={{ color: "grey" }}>Password</span></label>
-                                            <input type="password" id="password" className="form-control" style={{ width: '60%' }} onChange={this.handlechange} required></input>
+                                            <input type="password" id="password" className="form-control" style={{ width: '60%',border:"none",borderBottomStyle:"ridge" }} onChange={this.handlechange} required></input>
                                         </div>
 
                                         <div className="form-group">
