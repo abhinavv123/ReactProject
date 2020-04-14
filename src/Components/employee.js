@@ -1,23 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
-// import blusky from "../blusky.jpeg";
+import blusky from "../blusky.jpeg";
 import '../App.css';
-//import ReactSearchBox from 'react-search-box';
 import searchicon from '../searchicon.png';
 import Navbar from './navbar.js';
-import Info from './info.js';
-import { Link } from 'react-router-dom';
+import Info from './info';
 
 class Employee extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: {},
             Department: "All",
             Status: "All",
             name: "",
-            arr: []
+            arr: [],
+            obj: "",
+            advance:false,
+            hide:true
         }
     }
 
@@ -50,35 +51,41 @@ class Employee extends React.Component {
     givetable = () => {
         let rows = [];
         for (let i = 0; i < this.state.arr.length; i++) {
-            if ((this.state.name === this.state.arr[i].name || this.state.name === "") && (this.state.arr[i].Department === this.state.Department || this.state.Department === "All") && (this.state.Status === "All" || this.state.Status === this.state.arr[i].status) && (this.state.data !== this.state.arr[i])) {
+            if ((this.state.name === this.state.arr[i].name || this.state.name === "") && (this.state.arr[i].Department === this.state.Department || this.state.Department === "All") && (this.state.Status === "All" || this.state.Status === this.state.arr[i].status) && (this.state.data !== this.state.arr[i])) 
+            {
                 let varr = null;
                 if (this.state.arr[i].status === "Available") {
-                    varr = <td  style={{ color: "green" }}>{this.state.arr[i].status}</td>
+                    let dott = <span className="dot" style={{ height: "9px", width: "9px", borderRadius: "50%", display: "inline-block", backgroundColor: "green" }}></span>
+                    varr = <td style={{ color: "green", fontSize: "12px" }}>{dott}&nbsp;{this.state.arr[i].status}</td>
                 }
                 else {
-                    varr = <td  style={{ color: "red" }}>{this.state.arr[i].status}</td>
+                    let dott = <span className="dot" style={{ height: "9px", width: "9px", borderRadius: "50%", display: "inline-block", backgroundColor: "red" }}></span>
+                    varr = <td style={{ color: "red", fontSize: "12px" }}>{dott}&nbsp;{this.state.arr[i].status}</td>
                 }
                 rows.push(
-                        <tr key={this.state.arr[i].username}>
-                            <td><Link onclick="getColumnValue(this);">Click Me!</Link></td>
-                            <td >{this.state.arr[i].name}</td>
-                            <td >{this.state.arr[i].Department}</td>
-                            <td >{this.state.arr[i].phone}</td>
-                            {varr}
-                        </tr>
+                    <tr key={this.state.arr[i].username} onClick={() => this.setState({ obj: this.state.arr[i],hide:false })} value={this.state.arr[i]}>
+                        <td style={{ fontSize: "12px" }}> 
+                            <img className="inline-block rounded-circle" src={blusky} alt="Logo" style={{ height: "20px", width: "20px" }} ></img>
+                            &nbsp;&nbsp;
+                            {this.state.arr[i].name}
+                        </td>
+                        <td style={{ fontSize: "12px" }}>{this.state.arr[i].Department}</td>
+                        <td style={{ fontSize: "12px" }}>{this.state.arr[i].phone}</td>
+                        {varr}
+                    </tr>
                 )
             }
         }
         return (
             <div>
-                <table className="table table-striped table-hover ">
+                <table className="table table-hover " id="tableshow" >
                     <thead>
-                    <tr >
-                        <th >Name</th>
-                        <th >Department</th>
-                        <th >Phone Number</th>
-                        <th >Availability</th>
-                    </tr>
+                        <tr >
+                            <th style={{ fontSize: "14px" }} >Name</th>
+                            <th style={{ fontSize: "14px" }}>Department</th>
+                            <th style={{ fontSize: "14px" }}>Phone Number</th>
+                            <th style={{ fontSize: "14px" }}>Availability</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {rows}
@@ -86,35 +93,36 @@ class Employee extends React.Component {
                 </table>
             </div>)
     }
+
+    handlename = (e) => {
+        e.preventDefault();
+
+    }
+
     render() {
-        return (
-            <div>
-                <div className="container" style={{ margin: '50px', borderRadius: "5px" }}>
-                    <Navbar />
-                    <div className="row">
-                        <div className="col-md-8">
-                            <div className="card">
+        let big=<div>
+            <div className="card">
                                 <div className="card-body">
 
-                                    <span style={{ color: "grey" }}> Home&nbsp;
+                                    <span style={{ color: "grey", fontSize: "12px" }}> Home&nbsp;
                                         <i className="fa fa-angle-right"></i>
                                             &nbsp;
-                                        <b style={{ color: "grey" }}>Employee</b>
+                                        <b style={{ color: "grey", fontSize: "12px" }}>Employee</b>
                                     </span>
 
-                                    <button className="button1 float-right" type="button" style={{ padding: "5px", borderRadius: "5px", backgroundColor: "white", borderColor: "Dodgerblue" }}>
-                                        <b style={{ color: "Dodgerblue" }} >Add Employee +</b>
-                                    </button><br /><br/>
-                                    <hr/>
+                                    <button className="button1 float-right" type="button" style={{ borderRadius: "5px", backgroundColor: "white", borderColor: "Dodgerblue" }}>
+                                        <b style={{ color: "Dodgerblue", fontSize: "12px" }} >Add Employee +</b>
+                                    </button><br /><br />
+                                    <hr />
 
                                     <h2 style={{ color: "grey" }}>Employee Directory</h2>
 
                                     <br />
                                     <div className="row">
-                                        <div className="col-md-4">
+                                        <div className="col-md-4" style={{ paddingRight: "0" }}>
                                             <form>
                                                 <div className="form-group">
-                                                    <label htmlFor="search">Name</label><br />
+                                                    <label htmlFor="search" style={{ fontSize: "14px" }}>Name</label><br />
                                                     <div className="col-sm-12">
                                                         <input className="form-control"
                                                             type="text"
@@ -128,63 +136,95 @@ class Employee extends React.Component {
                                             </form>
                                         </div>
 
-                                        <div className="col-md-3">
+                                        <div className="col-md-3" style={{ paddingLeft: "0px", paddingRight: "0" }}>
                                             <form>
                                                 <div className="form-group">
-                                                    <label htmlFor="dept2" >Department</label>
+                                                    <label htmlFor="dept2" style={{ fontSize: "14px" }}>Department</label>
                                                     <div className="col-sm-12">
                                                         <select id="dept2" name="dept2" className="form-control" onChange={this.handletable}>>
-                                                        <option default value="All">All</option>
-                                                            <option value="Sales">Sales</option>
-                                                            <option value="Marketing">Marketing</option>
-                                                            <option value="Engineer">Engineer</option>
-                                                            <option value="Design">Design</option>
-                                                            <option value="Accountant">Accountant</option>
-                                                            <option value="Finance">Finance</option>
+                                                        <option default value="All" style={{ fontSize: "14px" }}>All</option>
+                                                            <option value="Sales" style={{ fontSize: "14px" }}>Sales</option>
+                                                            <option value="Marketing" style={{ fontSize: "14px" }}>Marketing</option>
+                                                            <option value="Engineer" style={{ fontSize: "14px" }}>Engineer</option>
+                                                            <option value="Design" style={{ fontSize: "14px" }}>Design</option>
+                                                            <option value="Accountant" style={{ fontSize: "14px" }}>Accountant</option>
+                                                            <option value="Finance" style={{ fontSize: "14px" }}>Finance</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
 
-                                        <div className="col-md-3">
+                                        <div className="col-md-3" style={{ paddingLeft: "0px", paddingRight: "0" }}>
                                             <form >
                                                 <div className="form-group">
-                                                    <label htmlFor="avail">Availability</label>
+                                                    <label htmlFor="avail" style={{ fontSize: "14px" }}>Availability</label>
                                                     <div className="col-sm-12">
                                                         <select id="avail" name="avail" className="form-control" onChange={this.handletable}>>
-                                                        <option default value="All">All</option>
-                                                            <option value="Available">Available</option>
-                                                            <option value="Out">Out</option>
+                                                        <option default value="All" style={{ fontSize: "14px" }}>All</option>
+                                                            <option value="Available" style={{ fontSize: "14px" }}>Available</option>
+                                                            <option value="Out" style={{ fontSize: "14px" }}>Out</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
-                                        <div className="col-md-2">
-                                            <button className="btn btn-primary rounded btn-lg" type="button" style={{padding:"15px"}}>Filter</button>
+                                        <div className="col-md-2" style={{ paddingLeft: "0px" }}>
+                                            <br></br>
+                                            <button className="btn btn-primary rounded block" type="button" style={{ padding: "15px", fontSize: "11px" }}>Filter</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div className="card">
-                                    <div className="card-header">
-
+                                    <div className="text-center">
+                                        <button type="button" onClick={()=>this.setState({advance:!this.state.advance})} style={{backgroundColor:"white",border:"none"}}><span style={{fontSize:"12px"}}> ADVANCED FILTER</span></button>
                                     </div>
-                                    <hr />
-                                    <div className="card-body">
+                                </div>
+                                <div className="card-footer">
+                                    {this.state.advance?
+                                    <div className="row">
+                                        <form className="form-inline">
+                                            <div className="form-group">
+                                                <label htmlFor="searchbyname" style={{ fontSize: "14px" }}></label><br />
+                                                <div className="col-sm-12">
+                                                    <input className="form-control"
+                                                        type="text"
+                                                        id="searchbyname"
+                                                        style={{ border: "none", backgroundImage: `url(${searchicon})`, backgroundRepeat: "no-repeat" }}
+                                                        placeholder="     Filter by name"
+                                                        onChange={this.handlename}>
+                                                    </input>
+                                                </div>
+                                            </div>
+                                            <div style={{ align: "right" }} className="form-group">
+                                                <label htmlFor="sort" style={{ fontSize: "12px" }}>Sort by:</label>&nbsp;&nbsp;
+                                                <select id="sort" name="sort" className="form-control" onChange={this.handlename}>>
+                                                    <option default value="Alphabetical A-Z" style={{ fontSize: "14px"  }}>Alphabetical A-Z</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                        <br/><br/>
+                                        </div>:
+                                    <div></div>}
+                                    <div>
                                         {this.givetable()}
                                     </div>
                                 </div>
                             </div>
+        </div>
+        return (
+            <div>
+                <div className="container" style={{ margin: '50px', borderRadius: "5px" }}>
+                    <Navbar />
+                    {this.state.hide?<div style={{zIndex:1}}>{big}</div>:
+                    <div className="row" style={{zIndex:1}}>
+                        <div className="col-md-8" style={{ paddingRight: "0", paddingBottom: "9999px", marginBottom: "-9999px" }}>
+                            {big}
                         </div>
 
-                        <div className="col-md-4">
-                            <Info/>
+                        <div className="col-md-4" style={{ paddingLeft: "0px" }}>
+                            <Info child={this.state.obj} />
                         </div>
 
-                    </div >
+                    </div >}
                 </div >
             </div >
         )

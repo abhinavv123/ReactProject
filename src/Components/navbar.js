@@ -8,7 +8,7 @@ class Navbar extends React.Component{
     render()
     {
         return (
-            <div>
+            <div style={{zIndex:2}}>
                 <nav className="navbar navbar-expand-lg bg-light navbar-light" style={{ borderRadius: "5px" }}>
                         <Link to="/" className="navbar-brand"><img className="inline-block rounded-circle" src={blusky} alt="Logo" style={{ height: "25px", width: "25px" }} ></img></Link>
 
@@ -82,8 +82,10 @@ class Navbar extends React.Component{
 
                                 <li className="nav-item">
                                     <span className="nav-link">
+                                        <Link to="/employee">
                                         <img className="inline-block rounded-circle" src={blusky} alt="Logo" style={{ height: "25px", width: "25px" }} ></img>
                                         &nbsp;<i className="fa fa-angle-down"></i>
+                                        </Link>
                                     </span>
                                 </li>
                             </ul>
