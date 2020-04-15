@@ -22,7 +22,7 @@ class Info extends React.Component{
     render()
     {
         return(
-        <div className="card">
+        <div className="card" >
             <div className="card-header">
                 <div className="container">
                     <div className="row">
