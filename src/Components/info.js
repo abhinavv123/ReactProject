@@ -2,22 +2,106 @@ import React from 'react';
 import '../App.css';
 import blusky from '../blusky.jpeg';
 import { Link } from 'react-router-dom';
-import fb from '../fb.png';
-import li from '../download.png';
-import sky from '../sky.png';
-import tw from '../tw.png';
+import fb from '../images/fb.png';
+import li from '../images/download.png';
+import sky from '../images/sky.png';
+import tw from '../images/tw.png';
+import axios from 'axios';
  
 class Info extends React.Component{
     constructor()
     {
         super();
         this.state={
-            obj:""
+            obj:"",
+            user:"",
+            sendpart:false,
+            messagesend:""
         }
     }
 
     componentWillMount=()=>{
-        this.setState({obj:this.props.child});
+        this.setState({obj:this.props.child,user:this.props.user});
+    }
+
+    send=(e)=>{
+        this.setState({messagesend:e.target.value});
+    }
+
+    sent=()=>{
+        let dum=this.state.obj;
+        let sender=this.state.user.username;
+        let flag=0;
+        for(let i=0;i<dum.MR.length;i++)
+        {
+            if(dum.MR[i].sendername===sender.username)
+            {
+                dum.MR[i].message.push(this.state.messagesend);
+                flag=1;
+                break;
+            }
+        }
+        if(flag===0)
+        {
+            let message=[];
+            message.push(this.state.messagesend);
+            let object={
+                name:sender,
+                message:message
+            }
+            dum.MR.push(object);
+        }
+
+        flag=0;
+        dum=this.state.user;
+        sender=this.state.obj.username;
+        for(let i=0;i<dum.MS.length;i++)
+        {
+            if(dum.MS[i].sendername===sender.username)
+            {
+                dum.MS[i].message.push(this.state.messagesend);
+                flag=1;
+                break;
+            }
+        }
+        if(flag===0)
+        {
+            let message=[];
+            message.push(this.state.messagesend);
+            let object={
+                name:sender,
+                message:message
+            }
+            dum.MS.push(object);
+        }
+        this.setState({user:dum,obj:dum,sendpart:false});
+        dum=JSON.stringify(dum);
+        console.log(dum);
+        let o={
+            email:"abhin@infosys.com",
+            username:"ab",
+            password:"abd",
+            name:"Abhinam",
+            Department:"Ening",
+            phone:"(956)010-559",
+            Officephone:"(404)1-5529",
+            status:"Avlable",
+            Office:"Hinadi",
+            Supervisor:"NA",
+            Sex:"male",
+            birthday:"Apr30",
+            profile:"SysEngineer",
+            City:"Pune",
+            MS:[],
+            MR:[]
+
+        }
+
+        axios.post('http://localhost:4000/data',o,{headers:{"Content-Type" : "application/json"}}).then(result=>{
+            console.log(result.data.message);
+        }).catch(er=>{
+            console.log(er);
+        })
     }
     render()
     {
@@ -104,8 +188,20 @@ class Info extends React.Component{
                         <div>{this.props.child.City}</div>
                     </div>
                 </div>
+                
             </div>
-            <hr/><br/><br/><br/><br/>
+            <hr/>
+            <button className="text-center btn-primary" type="button" onClick={()=>{this.setState({sendpart:true})}} style={{padding:"0px"}}>Send Message</button>
+            <br/>
+            
+            {this.state.sendpart?<form className="form-inline">
+                <div className="form-group">
+                <label htmlFor="sendmsg">
+                    <textarea className="form-control" id="form-control" rows="5" cols="30" placeholder="type a message" onChange={this.send}></textarea>
+                </label>
+                <button type="button" className="btn btn-primary" onClick={this.sent}>Send</button>
+            </div></form>:<div></div>}
+            <br/><br/>
         </div>)
     }
 }

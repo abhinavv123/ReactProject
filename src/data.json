@@ -14,7 +14,10 @@
             "Sex":"male",
             "birthday":"April 30",
             "profile":"System Engineer",
-            "City":"Pune"
+            "City":"Pune",
+            "MS":[],
+            "MR":[]
+
         },
         {
             "email":"cole.ashbury@infosys.com",
@@ -30,7 +33,9 @@
             "Sex":"male",
             "birthday":"April 01",
             "profile":"Senior System Engineer",
-            "City":"Pune"
+            "City":"Pune",
+            "MS":[],
+            "MR":[]
         },
         {
             "email":"joshua.baker@infosys.com",
@@ -46,7 +51,9 @@
             "Sex":"male",
             "birthday":"September 01",
             "profile":"Senior Accountant",
-            "City":"Bangalore"
+            "City":"Bangalore",
+            "MS":[],
+            "MR":[]
         },
         {
             "email":"dylan.ray@infosys.com",
@@ -62,7 +69,9 @@
             "Sex":"male",
             "birthday":"June 08",
             "profile":"Sales Manager",
-            "City":"California"
+            "City":"California",
+            "MS":[],
+            "MR":[]
         },
         {
             "email":"lisa.brad@infosys.com",
@@ -78,7 +87,9 @@
             "Sex":"female",
             "birthday":"July 22",
             "profile":"Marketing Manager",
-            "City":"London"
+            "City":"London",
+            "MS":[],
+            "MR":[]
         },
         {
             "email":"malina.craw@infosys.com",
@@ -94,7 +105,9 @@
             "Sex":"female",
             "birthday":"December 31",
             "profile":"Senior Finance Manager",
-            "City":"New York"
+            "City":"New York",
+            "MS":[],
+            "MR":[]
         },
         {
             "email":"taylor.lee@infosys.com",
@@ -110,7 +123,9 @@
             "Sex":"male",
             "birthday":"February 22",
             "profile":"Senior Designer",
-            "City":"Chandigarh"
+            "City":"Chandigarh",
+            "MS":[],
+            "MR":[]
         }
     ]
 }

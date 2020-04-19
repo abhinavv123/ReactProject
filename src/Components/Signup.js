@@ -6,8 +6,8 @@ import {Redirect} from 'react-router-dom';
 //import Employee from './employee.js';
 
 class Signup extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             form: {
                 username: "",

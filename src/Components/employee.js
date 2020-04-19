@@ -3,10 +3,9 @@ import axios from 'axios';
 // import { Link } from 'react-router-dom';
 import blusky from "../blusky.jpeg";
 import '../App.css';
-import searchicon from '../searchicon.png';
+import searchicon from '../images/searchicon.png';
 import Navbar from './navbar.js';
 import Info from './info';
-
 class Employee extends React.Component {
     constructor(props) {
         super(props);
@@ -234,9 +233,8 @@ class Employee extends React.Component {
                         </div>
 
                         <div className="col-md-4" style={{ paddingLeft: "0px" }}>
-                            <Info child={this.state.obj} />
+                            <Info child={this.state.obj} user={this.state.data}/>
                         </div>
-
                     </div >}
                 </div >
             </div >

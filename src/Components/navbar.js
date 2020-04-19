@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import blusky from "../blusky.jpeg";
 import '../App.css';
-import searchicon from '../searchicon.png';
+import searchicon from '../images/searchicon.png';
 
 class Navbar extends React.Component{
     render()
@@ -84,14 +84,14 @@ class Navbar extends React.Component{
                                     <span className="nav-link">
                                         <Link to="/employee">
                                         <img className="inline-block rounded-circle" src={blusky} alt="Logo" style={{ height: "25px", width: "25px" }} ></img>
+                                        </Link>
                                         &nbsp;
                                         <div className="dropdown">
                                         <button className="dropbtn "><i className="fa fa-angle-down"></i></button>
                                         <div className="dropdown-content">
-                                            <Link to='/' className="text-left nav-link">Logout</Link>
+                                            <Link to='/signup' className="text-left nav-link">Logout</Link>
                                         </div>
                                         </div>
-                                        </Link>
                                     </span>
                                 </li>
                             </ul>
